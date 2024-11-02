@@ -3,9 +3,10 @@ from urllib.parse import urlsplit
 from os.path import basename
 
 url = input("İndirmek istediğiniz dosyanın URL'sini girin: ")
+dosya_adi = input("Kaydetmek istediğiniz dosya adını girin (boş bırakılırsa varsayılan ad kullanılacak): ")
 
-# URL'den dosya adını al
-dosya_adi = basename(urlsplit(url).path) or "indirilen_dosya.apk"
+if not dosya_adi:
+    dosya_adi = basename(urlsplit(url).path) or "indirilen_dosya.apk"
 
 try:
     with requests.get(url, allow_redirects=True, stream=True, timeout=10) as response:
